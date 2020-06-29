@@ -71,3 +71,7 @@ img.cover-image {
 .icon.has-text-primary {
   color: var(--primary-color) !important;
 }
+
+.navbar-item:hover {
+  background-color: var(--primary-color-darker) !important;
+}
