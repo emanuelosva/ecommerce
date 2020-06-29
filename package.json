@@ -4,7 +4,7 @@
   "description": "Curso de express por Platzi.",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index",
+    "start": "NODE_ENV=production node src/index",
     "dev": "nodemon -e js,pug,css,json src/index.js"
   },
   "keywords": [
@@ -16,6 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "pug": "^3.0.0"
   }
