@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const config = require('./config');
 
 // Template routes
 const productsTemplateRouter = require('./routes/products');
@@ -30,6 +31,6 @@ app.get('/', (req, res) => res.redirect('/products'))
 app.use('/api', apiRouter);
 
 // Server
-const server = app.listen(3000, () => {
+const server = app.listen(config.port, () => {
   console.log(`App listening at http://localhost:${server.address().port}`);
 });
