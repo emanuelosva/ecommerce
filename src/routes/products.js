@@ -1,11 +1,22 @@
 const { Router } = require('express');
+const ProductsService = require('../services/products')
+const e = require('express');
 
+// Router initialization
 const router = Router();
 
-const products = require('../api/utils/mocks/products');
+// Data service
+const productsService = new ProductsService();
 
-router.get('/', (req, res) => {
-  res.render('products', { products: products });
+// Routes
+router.get('/', async (req, res, next) => {
+  const { tags } = req.query;
+  try {
+    const products = await productsService.getProducts({ tags: tags });
+    res.render('products', { products });
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;
