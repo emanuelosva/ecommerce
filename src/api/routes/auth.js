@@ -4,8 +4,9 @@ const boom = require('boom');
 const jwt = require('jsonwebtoken')
 const config = require('../../config');
 
-// Basic strategy
+// Strategys
 require('../../utils/auth/strategies/basic');
+require('../../utils/auth/strategies/github');
 
 // Routes
 const router = Router();
@@ -30,5 +31,13 @@ router.post('/token', async (req, res, next) => {
     }
   })(req, res, next);
 });
+
+router.get('/github', passport.authenticate('github'));
+router.get('/github/cb',
+  passport.authenticate('github', { failureMessage: 'Unauthorized' }),
+  (req, res, next) => {
+    res.json('Ok')
+  }
+)
 
 module.exports = router;
