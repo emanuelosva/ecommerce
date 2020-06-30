@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const passport = require('passport');
 
 // Validation middleware
 const validation = require('../../utils/middlewares/validationHandler');
@@ -9,6 +10,8 @@ const {
   updateProductSchema,
 } = require('../../utils/schemas/products');
 
+// JWT strategy 
+require('../../utils/auth/strategies/jwt')
 
 // Services
 const ProductServices = require('../../services/products');
@@ -71,6 +74,7 @@ router.post('/',
 );
 
 router.put('/:productId',
+  passport.authenticate('jwt', { session: false }),
   validation({ productId: productIdSchema }, 'params'),
   validation(updateProductSchema),
   async (req, res, next) => {
@@ -92,6 +96,7 @@ router.put('/:productId',
 );
 
 router.delete('/:productId',
+  passport.authenticate('jwt', { session: false }),
   validation({ productId: productIdSchema }, 'params'),
   async (req, res, next) => {
     const { productId } = req.params;
