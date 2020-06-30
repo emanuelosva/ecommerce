@@ -20,5 +20,7 @@ module.exports = {
     adminPassword: process.env.AUTH_ADMIN_PASSWORD || 'pass',
     adminEmail: process.env.AUTH_ADMIN_EMAIL || 'admin@mail.com',
     jwtSecret: process.env.AUTH_JWT_SECRET || 'secret',
+    githubId: process.env.GITHUB_ID || 'clientId',
+    githubSecret: process.env.GITHUB_SECRET || 'secret',
   },
 };
