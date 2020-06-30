@@ -27,3 +27,12 @@ Es como una serie de capas en un request. Con el podemons hacer modificaciones a
   * Application level
   * Built-in
   * Error-handling
+
+#### Middleware populares
+  * body-parse: Transformar json/buffers/text/urlencodes para ser consumidos por la API
+  * cors: Permite verificar el origen de los request
+  * morgan: logger del objeto request
+  * helment: Permite establecer headers de seguridad
+  * express-debug: Debugger por defecto de slash
+  * express-slash: permite el request con '/' al final
+  * passport: Serie de middlewares para manejo de identidad

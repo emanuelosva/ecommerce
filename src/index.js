@@ -1,4 +1,5 @@
 const express = require('express');
+const slash = require('express-slash');
 const bodyParser = require('body-parser');
 const boom = require('boom');
 const path = require('path');
@@ -19,8 +20,16 @@ const apiRouter = require('./api');
 
 // App
 const app = express();
+app.enable('strict routing')
+
+const router = express.Router({
+  caseSensitive: app.get('case sensitive routing'),
+  strict: app.get('strict routing')
+});
 
 // App midlewares settings
+app.use(router)
+app.use(slash());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
