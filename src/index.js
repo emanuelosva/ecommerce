@@ -16,20 +16,13 @@ const {
 const productsTemplateRouter = require('./routes/products');
 
 // Api routes
-const apiRouter = require('./api');
+const authApiRouter = require('./api/routes/auth');
+const productsApiRouter = require('./api/routes/products');
 
 // App
 const app = express();
-app.enable('strict routing')
-
-const router = express.Router({
-  caseSensitive: app.get('case sensitive routing'),
-  strict: app.get('strict routing')
-});
 
 // App midlewares settings
-app.use(router)
-app.use(slash());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -45,7 +38,8 @@ app.use('/products', productsTemplateRouter);
 app.get('/', (req, res) => res.redirect('/products'))
 
 // Router Api
-app.use('/api', apiRouter);
+productsApiRouter(app);
+app.use('/api/auth', authApiRouter);
 
 // 404
 app.use((req, res, next) => {
