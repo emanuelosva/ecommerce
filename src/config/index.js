@@ -15,4 +15,10 @@ module.exports = {
     node_env: process.env.NODE_ENV || 'development',
     dev: process.env.NODE_ENV !== 'production',
   },
+  auth: {
+    adminUsername: process.env.AUTH_ADMIN_USERNAME || 'admin',
+    adminPassword: process.env.AUTH_ADMIN_PASSWORD || 'pass',
+    adminEmail: process.env.AUTH_ADMIN_EMAIL || 'admin@mail.com',
+    jwtSecret: process.env.AUTH_JWT_SECRET || 'secret',
+  },
 };
