@@ -1,0 +1,78 @@
+const { describe } = require('mocha');
+const assert = require('assert');
+const proxyquire = require('proxyquire');
+const testServer = require('../src/utils/testServer');
+
+const {
+  productsMock,
+  ProductServiceMock,
+  filterProductMock
+} = require('../src/utils/mocks/products');
+
+
+// **EndPoint Tests**
+describe('routes - api - products', () => {
+  // Products api router
+  const route = proxyquire('../src/api/routes/products', {
+    '../../services/products': ProductServiceMock
+  });
+  const request = testServer(route);
+
+  // GET validations
+  describe('GET /products', () => {
+    it('should response with status 200', (done) => {
+      request.get('/api/products').expect(200, done);
+    });
+
+    it('should respond with Content-Type json', (done) => {
+      request.get('/api/products').expect('Content-type', /json/, done);
+    });
+
+    it('should response with no error', (done) => {
+      request.get('/api/products').end((err, res) => {
+        assert.strictEqual(err, null);
+        done();
+      })
+    });
+
+    it('should responde with the lsit of products', (done) => {
+      request.get('/api/products').end((err, res) => {
+        assert.deepEqual(res.body, {
+          data: productsMock,
+          message: 'Products List'
+        });
+        done();
+      })
+    });
+
+  });
+
+  describe('POST /products', () => {
+    it('should response with status 201', (done) => {
+      request.post('/api/products').expect(201, done)
+    });
+
+    it('should response with Content-Type json', (done) => {
+      request.post('/api/products').expect('Content-type', /json/, done)
+    });
+
+    it('should response with no error', (done) => {
+      request.post('/api/products').end((err, res) => {
+        assert.strictEqual(err, null);
+        done();
+      })
+    });
+
+    it('should response with productId', (done) => {
+      request.post('/api/products').end((err, res) => {
+        assert.deepEqual(res.body, {
+          data: '6bedb1267d1ca7f3053e2875',
+          message: "Product created"
+        })
+        done();
+      })
+    });
+
+  });
+
+});
