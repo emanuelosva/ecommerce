@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production node src/index",
+    "build": "cd src/public/assets/css && cleancss -o main.min.css main.css",
     "dev": "nodemon -e js,pug,css,json src/index.js",
     "dev:inspect": "nodemon --inspect src/index.js",
     "dev:debug": "DEBUG=express:*,app:* npm run dev",
@@ -40,6 +41,7 @@
   },
   "devDependencies": {
     "chalk": "^4.1.0",
+    "clean-css-cli": "^4.3.0",
     "mocha": "^8.0.1",
     "nyc": "^15.1.0",
     "proxyquire": "^2.1.3",

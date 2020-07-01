@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const config = require('../config');
 const ProductsService = require('../services/products');
 // const { ProductServiceMock } = require('../utils/mocks/products');
 // const axios = require('axios').default;
@@ -6,6 +7,9 @@ const ProductsService = require('../services/products');
 // Data service
 const productsService = new ProductsService();
 // const productsService = new ProductServiceMock();
+
+// Env
+const DEV = config.env.dev;
 
 // Routes
 const viewsProducts = (app) => {
@@ -20,7 +24,7 @@ const viewsProducts = (app) => {
       // const productsRes = await axios.get('http://localhost:3000/api/products');
       // const products = productsRes.data.data;
 
-      res.status(200).render('products', { products });
+      res.status(200).render('products', { products, dev: DEV });
     } catch (error) {
       next(error);
     }
