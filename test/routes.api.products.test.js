@@ -47,6 +47,37 @@ describe('routes - api - products', () => {
 
   });
 
+  describe('GET /products/productID', () => {
+    it('should response with status 200', (done) => {
+      request.get('/api/products/5efa47bc4329a3342cf1500e')
+        .expect(200, done);
+    });
+
+    it('should respond with Content-Type json', (done) => {
+      request.get('/api/products/5efa47bc4329a3342cf1500e')
+        .expect('Content-type', /json/, done);
+    });
+
+    it('should response with no error', (done) => {
+      request.get('/api/products/5efa47bc4329a3342cf1500e')
+        .end((err, res) => {
+          assert.strictEqual(err, null);
+          done();
+        })
+    });
+
+    it('should response with only one product', (done) => {
+      request.get('/api/products/5efa47bc4329a3342cf1500e')
+        .end((err, res) => {
+          assert.deepEqual(res.body, {
+            data: productsMock[0],
+            message: 'Products retrieve'
+          })
+          done();
+        })
+    })
+  });
+
   describe('POST /products', () => {
     it('should response with status 201', (done) => {
       request.post('/api/products').expect(201, done)

@@ -51,7 +51,6 @@
       "src/api",
       "src/lib",
       "src/routes",
-      "src/scripts",
       "src/services",
       "sr/utils"
     ]
