@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const passport = require('passport');
+const cors = require('cors');
 
 const cacheResponse = require('../../utils/cacheResponse');
 const {
@@ -26,7 +27,7 @@ const productService = new ProductServices();
 const apiProduct = (app) => {
 
   const router = Router();
-  app.use('/api/products', router);
+  app.use('/api/products', cors(), router);
 
   router.get('/',
     validation({ tags: productTagSchema }, 'query'),

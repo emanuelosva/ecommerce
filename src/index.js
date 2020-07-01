@@ -1,6 +1,7 @@
 const express = require('express');
 const debug = require('debug')('app:server');
 const bodyParser = require('body-parser');
+const cors = require('cors')
 const boom = require('boom');
 const helmet = require('helmet');
 const path = require('path');
@@ -41,7 +42,7 @@ app.get('/', (req, res) => res.redirect('/products'))
 
 // Router Api
 productsApiRouter(app);
-app.use('/api/auth', authApiRouter);
+app.use('/api/auth', cors(), authApiRouter);
 
 // 404
 app.use((req, res, next) => {
