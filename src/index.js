@@ -2,6 +2,7 @@ const express = require('express');
 const debug = require('debug')('app:server');
 const bodyParser = require('body-parser');
 const boom = require('boom');
+const helmet = require('helmet');
 const path = require('path');
 const config = require('./config');
 const isRequestAjaxOrApi = require('./utils/isRequestAjaxOrApi')
@@ -23,6 +24,7 @@ const productsApiRouter = require('./api/routes/products');
 const app = express();
 
 // App midlewares settings
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
