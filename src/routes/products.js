@@ -1,6 +1,9 @@
 const { Router } = require('express');
 const config = require('../config');
 const ProductsService = require('../services/products');
+const cacheResponse = require('../utils/cacheResponse');
+const { FIVE_MINUTES_IN_SECODS } = require('../utils/time');
+
 // const { ProductServiceMock } = require('../utils/mocks/products');
 // const axios = require('axios').default;
 
@@ -18,6 +21,7 @@ const viewsProducts = (app) => {
   app.use('/products', router);
 
   router.get('/', async (req, res, next) => {
+    cacheResponse(res, FIVE_MINUTES_IN_SECODS);
     const { tags } = req.query;
     try {
       const products = await productsService.getProducts({ tags: tags });

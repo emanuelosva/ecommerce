@@ -1,6 +1,12 @@
 const { Router } = require('express');
 const passport = require('passport');
 
+const cacheResponse = require('../../utils/cacheResponse');
+const {
+  FIVE_MINUTES_IN_SECODS,
+  SIXTY_MINUTES_IN_SECODS
+} = require('../../utils/time');
+
 // Validation middleware
 const validation = require('../../utils/middlewares/validationHandler');
 const {
@@ -25,6 +31,7 @@ const apiProduct = (app) => {
   router.get('/',
     validation({ tags: productTagSchema }, 'query'),
     async (req, res, next) => {
+      cacheResponse(res, FIVE_MINUTES_IN_SECODS);
       const { tags } = req.query;
       try {
         const products = await productService
@@ -43,6 +50,7 @@ const apiProduct = (app) => {
   router.get('/:productId',
     validation({ productId: productIdSchema }, 'params'),
     async (req, res, next) => {
+      cacheResponse(res, SIXTY_MINUTES_IN_SECODS);
       const { productId } = req.params;
       try {
         const product = await productService
