@@ -3,8 +3,11 @@ const proxyquire = require('proxyquire');
 const { describe } = require('mocha');
 
 const {
-  createStub,
   getAllStub,
+  getStub,
+  createStub,
+  updateStub,
+  deleteStub,
   MongoLibMock
 } = require('../src/utils/mocks/mongoLib');
 
@@ -50,6 +53,19 @@ describe('services - products', () => {
     });
   });
 
+  describe('when getProduct method is called', async () => {
+    it('should call get MongoLib method', async () => {
+      await productServices.getProduct({});
+      assert.strictEqual(getStub.called, true)
+    });
+
+    it('should return only one product', async () => {
+      const result = await productServices.getProduct({});
+      const expected = productsMock[0];
+      assert.strictEqual(result, expected);
+    });
+  });
+
   describe('when createProduct method is called', async () => {
     it('should call create MongoLib method', async () => {
       await productServices.createProduct({});
@@ -62,4 +78,31 @@ describe('services - products', () => {
       assert.strictEqual(result, expected);
     });
   });
+
+  describe('when updateProduct method is called', async () => {
+    it('should call update MongoLib method', async () => {
+      await productServices.updateProduct({});
+      assert.strictEqual(updateStub.called, true)
+    });
+
+    it('should return a updated product id', async () => {
+      const result = await productServices.updateProduct({});
+      const expected = '6bedb1267d1ca7f3053e2875';
+      assert.strictEqual(result, expected);
+    });
+  });
+
+  describe('when deleteProduct method is called', async () => {
+    it('should call delete MongoLib method', async () => {
+      await productServices.deleteProduct({});
+      assert.strictEqual(deleteStub.called, true)
+    });
+
+    it('should return a deleted product id', async () => {
+      const result = await productServices.deleteProduct({});
+      const expected = '6bedb1267d1ca7f3053e2875';
+      assert.strictEqual(result, expected);
+    });
+  });
+
 })
