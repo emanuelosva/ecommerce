@@ -1,11 +1,11 @@
 const { describe } = require('mocha');
 const assert = require('assert');
 const proxyquire = require('proxyquire');
-const { ProductServiceMock } = require('../src/utils/mocks/products');
-const testServer = require('../src/utils/testServer');
+const { ProductServiceMock } = require('../utils/mocks/products');
+const testServer = require('../utils/testServer');
 
 describe('routes - views - products', () => {
-  const route = proxyquire('../src/routes/products', {
+  const route = proxyquire('../routes/products', {
     '../services/products': ProductServiceMock
   });
   const request = testServer(route);

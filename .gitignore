@@ -117,3 +117,8 @@ dist
 
 # nyc
 .nyc_output
+
+# vercel
+.vercel
+.vercelignore
+vercel.*

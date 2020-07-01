@@ -9,17 +9,17 @@ const {
   updateStub,
   deleteStub,
   MongoLibMock
-} = require('../src/utils/mocks/mongoLib');
+} = require('../utils/mocks/mongoLib');
 
 const {
   productsMock,
   filterProductMock
-} = require('../src/utils/mocks/products');
+} = require('../utils/mocks/products');
 
 
 // **Services Tests**
 describe('services - products', () => {
-  const ProductServices = proxyquire('../src/services/products', {
+  const ProductServices = proxyquire('../services/products', {
     '../lib/mongo': MongoLibMock
   });
 

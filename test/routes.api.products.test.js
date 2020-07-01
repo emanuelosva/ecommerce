@@ -1,19 +1,19 @@
 const { describe } = require('mocha');
 const assert = require('assert');
 const proxyquire = require('proxyquire');
-const testServer = require('../src/utils/testServer');
+const testServer = require('../utils/testServer');
 
 const {
   productsMock,
   ProductServiceMock,
   filterProductMock
-} = require('../src/utils/mocks/products');
+} = require('../utils/mocks/products');
 
 
 // **EndPoint Tests**
 describe('routes - api - products', () => {
   // Products api router
-  const route = proxyquire('../src/api/routes/products', {
+  const route = proxyquire('../api/routes/products', {
     '../../services/products': ProductServiceMock
   });
   const request = testServer(route);

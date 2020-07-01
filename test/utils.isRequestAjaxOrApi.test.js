@@ -1,5 +1,5 @@
 const assert = require('assert');
-const isRequestAjaxOrApi = require('../src/utils/isRequestAjaxOrApi');
+const isRequestAjaxOrApi = require('../utils/isRequestAjaxOrApi');
 const { describe } = require('mocha');
 
 // **Utils isRequestAjaxOrApi test**
