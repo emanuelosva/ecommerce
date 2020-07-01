@@ -1,5 +1,5 @@
 const express = require('express');
-const slash = require('express-slash');
+const debug = require('debug')('app:server');
 const bodyParser = require('body-parser');
 const boom = require('boom');
 const path = require('path');
@@ -62,5 +62,5 @@ app.use(errorHandler);
 
 // Server
 const server = app.listen(config.port, () => {
-  console.log(`App listening at http://localhost:${server.address().port}`);
+  debug(`App listening at http://localhost:${server.address().port}`);
 });

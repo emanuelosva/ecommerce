@@ -1,4 +1,5 @@
 const { MongoClient, ObjectID } = require('mongodb');
+const debug = require('debug')('app:mongo');
 const config = require('../config');
 
 const MONGO_URI = config.db.URI;
@@ -21,7 +22,7 @@ class MongoLib {
     try {
       let client = await this.client.connect();
       this.connection = client.db(this.dbName)
-      console.log('[DB] -> connected successfully.')
+      debug('[DB] -> connected successfully.')
       return this.connection;
     } catch (error) {
       console.error(`[db] -> Error: ${error}`)

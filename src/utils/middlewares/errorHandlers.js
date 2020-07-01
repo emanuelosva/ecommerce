@@ -1,4 +1,5 @@
 const boom = require('boom');
+const debug = require('debug')('app:error');
 const config = require('../../config');
 const isRequestAjaxOrApi = require('../isRequestAjaxOrApi');
 
@@ -8,7 +9,7 @@ const withErrorStack = (err, stack) => {
 
 // Log errors
 const logErrors = (err, req, res, next) => {
-  console.error(`ERROR -> ${err.stack}`);
+  debug(`ERROR -> ${err.stack}`);
   next(err);
 };
 
